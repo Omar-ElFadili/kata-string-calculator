@@ -30,7 +30,7 @@ class ClazzTest{
         assertEquals(15, clazz.add("5\n5,5"));
     }
     @Test
-    @DisplayName("this test must be return the sum of number when the separator is *")
+    @DisplayName("this test must be return the sum of number when the separator is ,")
     public void should_return_10_when_separator()throws Exception {
         assertEquals(10, clazz.add("//,\n7,2,1"));
     }

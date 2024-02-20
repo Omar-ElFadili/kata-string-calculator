@@ -14,26 +14,34 @@ class Clazz{
         }
         else{
             if(numbers.substring(0, 2).equals("//")){
-                String delimeter = numbers.substring(2,3);
-                String newString = numbers.substring(4,numbers.length());
-                String[] str = newString.split(delimeter);
-                int[] integers = new int[str.length];
-                int sum = 0;
-                List<Integer> list = new ArrayList<>();
-                for(int i=0; i<str.length; i++){
-                    integers[i] = Integer.parseInt(str[i]);
-                    if(integers[i] < 0){
-                        list.add(integers[i]);
+                String[] str1 = numbers.split("\n");
+                if(str1.length == 2){
+                    String[] strDelimiter = str1[0].split("//");
+                    String delimeter = strDelimiter[0];
+                    System.out.println(strDelimiter[0]);
+                    String[] str3 = str1[1].split(delimeter);
+                    int[] integers = new int[str3.length];
+                    int sum = 0;
+                    List<Integer> list = new ArrayList<>();
+                    for(int i=0; i<str3.length; i++){
+                        integers[i] = Integer.parseInt(str3[i]);
+                        if(integers[i] < 0){
+                            list.add(integers[i]);
+                        }
+                        sum += integers[i];
                     }
-                    sum += integers[i];
+                    if(list.size() != 0){
+                        String result = list.stream()
+                                .map(Object::toString) // Convertir chaque nombre en chaîne de caractères
+                                .collect(Collectors.joining(","));
+                        throw new Exception("negatives not allowed"+ result);
+                    }
+                    return sum;
                 }
-                if(list.size() != 0){
-                    String result = list.stream()
-                            .map(Object::toString) // Convertir chaque nombre en chaîne de caractères
-                            .collect(Collectors.joining(","));
-                    throw new Exception("negatives not allowed"+ result);
+                else{
+                    return 0;
                 }
-                return sum;
+
             }
             else{
                 String[] str = numbers.split("[,\n]");
